@@ -1,8 +1,5 @@
 import { HeliusTransaction } from "../types";
-
-const HELIUS_RPC_URL = `https://devnet.helius-rpc.com/?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}`;
-
-const TRANSACTIONS_URL = `https://api-devnet.helius.xyz/v0/transactions?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}`;
+import { HELIUS_RPC_URL, TRANSACTIONS_URL } from "../utils/config";
 
 export const fetchAssetsByOwner = async ({
   ownerAddress,
@@ -37,10 +34,6 @@ export const fetchAssetsByOwner = async ({
   })
 
   const json = await res.json()
-
-  // For debugging, you could log the full response if needed
-  // console.log(JSON.stringify(json, null, 2))
-
   return json.result?.items || []
 }
 
@@ -49,7 +42,7 @@ export const fetchTransactions = async ({
   before = null,
 }: {
   walletAddress: string;
-  before: number | null;
+  before: string | number | null;
 }): Promise<HeliusTransaction[]> => {
   const res = await fetch(TRANSACTIONS_URL, {
     method: 'POST',

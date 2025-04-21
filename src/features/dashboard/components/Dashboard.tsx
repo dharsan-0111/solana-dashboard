@@ -47,7 +47,7 @@ const Dashboard = () => {
           </Tabs>
         </div>
       </main>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   )
 }

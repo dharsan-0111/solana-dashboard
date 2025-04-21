@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { fetchAssetsByOwner } from '../api/helius'
 
-const cliWalletAddress = '3BLGGjURMh9xN6BtmeuT5HnHSLL4FBFiTh5ELKZe5n3X';
+const cliWalletAddress = process.env.NEXT_PUBLIC_CLIENT_WALLET_ADDRESS;
 
 export const useNFTs = () => {
   const { publicKey } = useWallet()
@@ -12,7 +12,7 @@ export const useNFTs = () => {
     initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       fetchAssetsByOwner({
-        ownerAddress: cliWalletAddress,
+        ownerAddress: cliWalletAddress as string,
         interfaceType: 'NonFungibleToken',
         limit: 10,
         page: pageParam as number

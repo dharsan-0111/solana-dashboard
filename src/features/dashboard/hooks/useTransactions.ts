@@ -10,9 +10,9 @@ export const useTransactions = () => {
   return useInfiniteQuery({
     queryKey: ["transactions", publicKey?.toBase58()],
     queryFn: ({ pageParam = null }) =>
-      fetchTransactions({ walletAddress: publicKey!.toBase58(), before: pageParam }),
+      fetchTransactions({ walletAddress: publicKey!.toBase58(), before: String(pageParam) }),
     enabled: !!publicKey,
-    initialPageParam: 1,
+    initialPageParam: "1",
     getNextPageParam: (lastPage) => {
       if (!lastPage.length) return undefined;
       return lastPage[lastPage.length - 1]?.signature;
